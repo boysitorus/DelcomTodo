@@ -71,29 +71,29 @@ class ProfileActivity : AppCompatActivity() {
                 }
             }
         }
+    }
 
+    private fun loadProfileData(profile: DataUserResponse){
+        binding.apply {
 
-        private fun loadProfileData(profile: DataUserResponse){
-            binding.apply {
-
-                if(profile.user.photo != null){
-                    val urlImg = "https://public-api.delcom.org/${profile.user.photo}"
-                    Glide.with(this@ProfileActivity)
-                        .load(urlImg)
-                        .placeholder(R.drawable.ic_person)
-                        .into(ivProfile)
-                }
-
-                tvProfileName.text = profile.user.name
-                tvProfileEmail.text = profile.user.email
+            if(profile.user.photo != null){
+                val urlImg = "https://public-api.delcom.org/${profile.user.photo}"
+                Glide.with(this@ProfileActivity)
+                    .load(urlImg)
+                    .placeholder(R.drawable.ic_person)
+                    .into(ivProfile)
             }
-        }
 
-        private fun openLoginActivity() {
-            val intent = Intent(applicationContext, LoginActivity::class.java)
-            intent.flags =
-                Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-            startActivity(intent)
-            finish()
+            tvProfileName.text = profile.user.name
+            tvProfileEmail.text = profile.user.email
         }
     }
+
+    private fun openLoginActivity() {
+        val intent = Intent(applicationContext, LoginActivity::class.java)
+        intent.flags =
+            Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+        startActivity(intent)
+        finish()
+    }
+}
